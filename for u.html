@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>⚖️ Sidang Cinta - Untuk Dea ⚖️</title>
+    <title>How's your Day?</title>
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         body {
             min-height: 100vh;
             background: linear-gradient(145deg, #ffd9e8 0%, #ffb0c8 100%);
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Segoe UI Emoji', cursive, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             padding: 20px 16px 40px;
             position: relative;
         }
@@ -65,11 +65,10 @@
             letter-spacing: 2px;
         }
 
-        /* Karakter row vertical */
         .karakter-row {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
         }
 
         .karakter-item {
@@ -78,7 +77,7 @@
             gap: 14px;
             background: #fff5f7;
             border-radius: 45px;
-            padding: 8px 15px;
+            padding: 10px 15px;
             box-shadow: 0 4px 10px #ffc0d0;
         }
 
@@ -133,27 +132,32 @@
             border-radius: 50px;
         }
 
+        /* SCROLL AREA */
+        .scroll-surat {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .scroll-surat::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .scroll-surat::-webkit-scrollbar-track {
+            background: #ffe0e8;
+            border-radius: 10px;
+        }
+
+        .scroll-surat::-webkit-scrollbar-thumb {
+            background: #ff99aa;
+            border-radius: 10px;
+        }
+
         .isi-surat {
             font-size: 0.9rem;
             line-height: 1.65;
             color: #3f2c34;
             white-space: pre-line;
-            max-height: 380px;
-            overflow-y: auto;
-            padding-right: 8px;
-            scrollbar-width: thin;
-        }
-
-        .isi-surat::-webkit-scrollbar {
-            width: 5px;
-        }
-        .isi-surat::-webkit-scrollbar-track {
-            background: #ffcddc;
-            border-radius: 10px;
-        }
-        .isi-surat::-webkit-scrollbar-thumb {
-            background: #ff778f;
-            border-radius: 10px;
         }
 
         .isi-surat p {
@@ -178,7 +182,7 @@
             background: #ff778f;
             border: none;
             padding: 14px 28px;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: bold;
             border-radius: 50px;
             color: white;
@@ -193,49 +197,55 @@
             box-shadow: 0 1px 0 #aa3352;
         }
 
-        /* Popup modal untuk GIF */
+        /* Modal Popup untuk GIF */
         .modal-popup {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.7);
-            display: flex;
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
+
         .modal-content {
-            background: #fff0f3;
-            border-radius: 50px;
+            background: #fff0f5;
+            border-radius: 40px;
             padding: 20px;
             text-align: center;
-            max-width: 300px;
-            width: 80%;
+            max-width: 90%;
+            width: 300px;
             border: 4px solid #ff99aa;
-            box-shadow: 0 20px 35px hotpink;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: bounce 0.3s ease;
         }
+
+        @keyframes bounce {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .modal-content img {
             width: 100%;
-            border-radius: 35px;
+            border-radius: 30px;
             margin-bottom: 15px;
         }
+
         .modal-content p {
             color: #d43f6b;
             font-weight: bold;
             margin-bottom: 15px;
         }
+
         .close-modal {
             background: #ff99aa;
-            border: none;
             padding: 8px 20px;
-            border-radius: 40px;
-            color: white;
             font-size: 1rem;
-            cursor: pointer;
-            box-shadow: none;
+            box-shadow: 0 2px 0 #aa3352;
         }
 
         .footer {
@@ -254,33 +264,29 @@
             .karakter-dialog {
                 font-size: 0.95rem;
             }
-            .isi-surat {
-                font-size: 1rem;
-                max-height: 450px;
-            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- SIDANG DIMULAI -->
+    <!-- SIDANG -->
     <div class="sidang-panel">
         <div class="judul-sidang">⚖️ SIDANG DIMULAI ⚖️</div>
         
         <div class="karakter-row">
             <!-- Hakim Ada Wong -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoWong" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Wong">
+                <img class="karakter-avatar" id="fotoWong" src="https://placehold.co/200x200/ffb7c5/white?text=Loading..." alt="Wong">
                 <div class="karakter-dialog">
                     <span class="nama-kecil">⚖️ Hakim Ada Wong</span>
                     "Terdakwa, apakah benar anda terlalu berlebihan kemarin?"
                 </div>
             </div>
 
-            <!-- Kucing (terdakwa) -->
+            <!-- Kucing -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoKucing1" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Kucing">
+                <img class="karakter-avatar" id="fotoKucing" src="https://placehold.co/200x200/ffb7c5/white?text=Loading..." alt="Kucing">
                 <div class="karakter-dialog">
                     <span class="nama-kecil">🐱 Terdakwa (Kucing)</span>
                     "meow... meow..."
@@ -289,7 +295,7 @@
 
             <!-- Hakim Wong catat -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoWong2" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Wong">
+                <div style="width:70px; height:70px; background:#ffcddc; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem;">📝</div>
                 <div class="karakter-dialog">
                     <span class="nama-kecil">⚖️ Hakim Ada Wong</span>
                     "Dicatat sebagai 'iya'."
@@ -298,7 +304,7 @@
 
             <!-- Jaksa Nami -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoNami" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Nami">
+                <img class="karakter-avatar" id="fotoNami" src="https://placehold.co/200x200/ffb7c5/white?text=Loading..." alt="Nami">
                 <div class="karakter-dialog">
                     <span class="nama-kecil">🎤 Jaksa Nami</span>
                     "Apakah benar anda membuat kesalahan berulang kali?"
@@ -307,16 +313,16 @@
 
             <!-- Kucing meow lagi -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoKucing2" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Kucing">
+                <img class="karakter-avatar" id="fotoKucing2" src="https://placehold.co/200x200/ffb7c5/white?text=Loading..." alt="Kucing">
                 <div class="karakter-dialog">
                     <span class="nama-kecil">🐱 Terdakwa</span>
                     "meow... 😭"
                 </div>
             </div>
 
-            <!-- Jaksa Nami simpulkan -->
+            <!-- Jaksa Nami menyimpulkan -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoNami2" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Nami">
+                <div style="width:70px; height:70px; background:#ffcddc; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem;">⚖️</div>
                 <div class="karakter-dialog">
                     <span class="nama-kecil">🎤 Jaksa Nami</span>
                     "Yang mulia, terdakwa mengaku bersalah."
@@ -325,7 +331,7 @@
 
             <!-- Putusan Hakim Wong -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoWong3" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Wong">
+                <img class="karakter-avatar" id="fotoWong2" src="https://placehold.co/200x200/ffb7c5/white?text=Loading..." alt="Wong">
                 <div class="karakter-dialog">
                     <span class="nama-kecil">⚖️ Putusan Hakim Ada Wong</span>
                     "Terdakwa diwajibkan belajar dari kesalahannya."
@@ -334,7 +340,7 @@
 
             <!-- Nami + kucing penutup -->
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoNami3" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Nami">
+                <img class="karakter-avatar" id="fotoNami2" src="https://placehold.co/200x200/ffb7c5/white?text=Loading..." alt="Nami">
                 <div class="karakter-dialog">
                     <span class="nama-kecil">🎤 Jaksa Nami</span>
                     "Dan Lea diwajibkan baca website sampai selesai."
@@ -342,7 +348,7 @@
             </div>
 
             <div class="karakter-item">
-                <img class="karakter-avatar" id="fotoKucing3" src="https://placehold.co/200x200/ffb7c5/white?text=LOAD" alt="Kucing">
+                <img class="karakter-avatar" id="fotoKucing3" src="https://placehold.co/200x200/ffb7c5/white?text=Loading..." alt="Kucing">
                 <div class="karakter-dialog">
                     <span class="nama-kecil">🐱</span>
                     "🐾"
@@ -354,46 +360,57 @@
     <!-- Surat untuk Dea dengan SCROLL -->
     <div class="surat-box">
         <div class="judul-surat">💌 Untuk Dea 💌</div>
-        <div class="isi-surat">
-            <p>lea,</p>
-            <p>aku udah baca semuanya berkali-kali, dan makasih karena udah jujur ke aku.</p>
-            <p>pertama, aku mau minta maaf buat kemarin. jujur aja, ini pertama kalinya aku deket banget sama cewek, jadi aku masih sering salah langkah, sering terlalu berlebihan, dan kadang ngulang kesalahan yang sama tanpa sadar. itu bukan alasan sih, tapi aku sadar aku memang banyak kurangnya.</p>
-            <p>aku juga ngerti kenapa kamu ngomong seperti itu. aku tau kamu nggak mau aku berharap sendirian, nggak mau aku terus nunggu sesuatu yang belum tentu bisa kamu kasih. dan jujur, aku menghargai kejujuran kamu.</p>
-            <p>tapi ada satu hal yang pengen aku bilang.</p>
-            <p>aku nggak marah sama sekali sama kamu.</p>
-            <p>aku juga nggak nyalahin kamu karena nggak yakin sama perasaanmu.</p>
-            <p>yang paling bikin aku kepikiran justru karena aku masih merasa bersalah atas semua yang terjadi kemarin.</p>
-            <p>aku bukan tipe orang yang kabur pas ada masalah. kalau aku bikin salah, aku pengen belajar dan bertanggung jawab atas itu.</p>
-            <p>dan setelah semua yang terjadi, aku banyak mikir, banyak evaluasi diri, dan banyak belajar juga.</p>
-            <p>jadi santai aja, lea.</p>
-            <p>aku udah nggak mau jadi cahya yang kemarin.</p>
-            <p>i'm trying to be better, pelan-pelan.</p>
-            <p>dan kalau suatu hari nanti kamu udah lebih tenang, udah lebih nyaman, aku cuma pengen nanya satu hal.</p>
-            <p>boleh nggak cahya masuk ke hidup kamu lagi?</p>
-            <p>nggak harus sebagai seseorang yang kamu suka.</p>
-            <p>nggak harus dengan perasaan yang sama.</p>
-            <p>aku cuma pengen bisa ngobrol lagi, ketawa lagi, mabar lagi, dan jadi orang yang nggak bikin kamu sedih.</p>
-            <p>dan soal maaf...</p>
-            <p>nggak usah sekarang.</p>
-            <p>ambil waktu sebanyak yang kamu butuhin.</p>
-            <p>kalau memang masih mau ngeblokir aku dulu, gapapa.</p>
-            <p>kalau memang masih butuh space, gapapa juga.</p>
-            <p>take your time.</p>
-            <p>aku harap kamu bisa fokus ke diri kamu sendiri dulu dan menikmati hari-harimu dengan tenang.</p>
-            <p>dan kalau suatu hari nanti semuanya udah membaik...</p>
-            <p>siapa tau kita bisa ketemu lagi di lobby mobile legends sambil saling ejek rank wkwk.</p>
-            <p>jaga diri baik-baik ya, dei 🌻</p>
-        </div>
-        <div class="signature">
-            — Cahya, terdakwa yang sedang belajar 🌱
+        <div class="scroll-surat">
+            <div class="isi-surat">
+                <p>lea,</p>
+                <p>aku udah baca semuanya berkali-kali, dan makasih karena udah jujur ke aku.</p>
+                <p>pertama, aku mau minta maaf buat kemarin. jujur aja, ini pertama kalinya aku deket banget sama cewek, jadi aku masih sering salah langkah, sering terlalu berlebihan, dan kadang ngulang kesalahan yang sama tanpa sadar. itu bukan alasan sih, tapi aku sadar aku memang banyak kurangnya.</p>
+                <p>aku juga ngerti kenapa kamu ngomong seperti itu. aku tau kamu nggak mau aku berharap sendirian, nggak mau aku terus nunggu sesuatu yang belum tentu bisa kamu kasih. dan jujur, aku menghargai kejujuran kamu.</p>
+                <p>tapi ada satu hal yang pengen aku bilang.</p>
+                <p>aku nggak marah sama sekali sama kamu.</p>
+                <p>aku juga nggak nyalahin kamu karena nggak yakin sama perasaanmu.</p>
+                <p>yang paling bikin aku kepikiran justru karena aku masih merasa bersalah atas semua yang terjadi kemarin.</p>
+                <p>aku bukan tipe orang yang kabur pas ada masalah. kalau aku bikin salah, aku pengen belajar dan bertanggung jawab atas itu.</p>
+                <p>dan setelah semua yang terjadi, aku banyak mikir, banyak evaluasi diri, dan banyak belajar juga.</p>
+                <p>jadi santai aja, lea.</p>
+                <p>aku udah nggak mau jadi cahya yang kemarin.</p>
+                <p>i'm trying to be better, pelan-pelan.</p>
+                <p>dan kalau suatu hari nanti kamu udah lebih tenang, udah lebih nyaman, aku cuma pengen nanya satu hal.</p>
+                <p>boleh nggak cahya masuk ke hidup kamu lagi?</p>
+                <p>nggak harus sebagai seseorang yang kamu suka.</p>
+                <p>nggak harus dengan perasaan yang sama.</p>
+                <p>aku cuma pengen bisa ngobrol lagi, ketawa lagi, mabar lagi, dan jadi orang yang nggak bikin kamu sedih.</p>
+                <p>dan soal maaf...</p>
+                <p>nggak usah sekarang.</p>
+                <p>ambil waktu sebanyak yang kamu butuhin.</p>
+                <p>kalau memang masih mau ngeblokir aku dulu, gapapa.</p>
+                <p>kalau memang masih butuh space, gapapa juga.</p>
+                <p>take your time.</p>
+                <p>aku harap kamu bisa fokus ke diri kamu sendiri dulu dan menikmati hari-harimu dengan tenang.</p>
+                <p>dan kalau suatu hari nanti semuanya udah membaik...</p>
+                <p>siapa tau kita bisa ketemu lagi di lobby mobile legends sambil saling ejek rank wkwk.</p>
+                <p>jaga diri baik-baik ya, dei 🌻</p>
+            </div>
+            <div class="signature">
+                — Cahya, terdakwa yang sedang belajar 🌱
+            </div>
         </div>
     </div>
 
     <div class="tombol-love">
-        <button id="btnLove">RAHASIAAA JANGAN DI KLIK!!</button>
+        <button id="btnLove">💖 Klik ini 💖</button>
     </div>
     <div class="footer">
         ⚖️ sidang ditutup dengan pelukan virtual 🤗💕
+    </div>
+</div>
+
+<!-- Modal Popup GIF -->
+<div id="gifModal" class="modal-popup">
+    <div class="modal-content">
+        <img id="gifPopup" src="" alt="Love GIF">
+        <p>💘 Love terkirim untuk Dea! 💘</p>
+        <button class="close-modal">Tutup ✨</button>
     </div>
 </div>
 
@@ -402,41 +419,37 @@
     const URL_WONG = "https://l.top4top.io/p_3814i1lt31.jpg";
     const URL_NAMI = "https://d.top4top.io/p_381465w2o1.jpg";
     const URL_KUCING = "https://i.top4top.io/p_3814kmfwm1.png";
-    const URL_GIF_POPUP = "https://c.top4top.io/p_3814qjknc1.gif";
+    const URL_GIF = "https://c.top4top.io/p_3814qjknc1.gif";  // Ganti jika link GIF nya beda
 
-    // Daftar semua elemen gambar
+    // Ambil semua elemen gambar
     const fotoWong = document.getElementById('fotoWong');
     const fotoWong2 = document.getElementById('fotoWong2');
-    const fotoWong3 = document.getElementById('fotoWong3');
     const fotoNami = document.getElementById('fotoNami');
     const fotoNami2 = document.getElementById('fotoNami2');
-    const fotoNami3 = document.getElementById('fotoNami3');
-    const fotoKucing1 = document.getElementById('fotoKucing1');
+    const fotoKucing = document.getElementById('fotoKucing');
     const fotoKucing2 = document.getElementById('fotoKucing2');
     const fotoKucing3 = document.getElementById('fotoKucing3');
 
-    function setImage(imgElement, url, fallbackText) {
+    function setImage(imgEl, url, fallbackText) {
         if (url && url !== "") {
-            imgElement.src = url;
-            imgElement.onerror = () => {
-                imgElement.src = `https://placehold.co/200x200/ffb7c5/white?text=${fallbackText}`;
+            imgEl.src = url;
+            imgEl.onerror = () => {
+                imgEl.src = `https://placehold.co/200x200/ffb7c5/white?text=${fallbackText}`;
             };
         } else {
-            imgElement.src = `https://placehold.co/200x200/ffb7c5/white?text=${fallbackText}`;
+            imgEl.src = `https://placehold.co/200x200/ffb7c5/white?text=${fallbackText}`;
         }
     }
 
-    setImage(fotoWong, URL_WONG, "🐻");
-    setImage(fotoWong2, URL_WONG, "🐻");
-    setImage(fotoWong3, URL_WONG, "🐻");
-    setImage(fotoNami, URL_NAMI, "🌸");
-    setImage(fotoNami2, URL_NAMI, "🌸");
-    setImage(fotoNami3, URL_NAMI, "🌸");
-    setImage(fotoKucing1, URL_KUCING, "🐱");
-    setImage(fotoKucing2, URL_KUCING, "🐱");
-    setImage(fotoKucing3, URL_KUCING, "🐱");
+    setImage(fotoWong, URL_WONG, "🐻+WONG");
+    setImage(fotoWong2, URL_WONG, "🐻+WONG");
+    setImage(fotoNami, URL_NAMI, "🌸+NAMI");
+    setImage(fotoNami2, URL_NAMI, "🌸+NAMI");
+    setImage(fotoKucing, URL_KUCING, "🐱+KUCING");
+    setImage(fotoKucing2, URL_KUCING, "🐱+KUCING");
+    setImage(fotoKucing3, URL_KUCING, "🐱+KUCING");
 
-    // Floating hearts
+    // Floating heart
     function createFloatingHeart() {
         const heart = document.createElement('div');
         heart.classList.add('floating-heart');
@@ -455,47 +468,51 @@
         }
     }
 
-    // Popup GIF
+    // Modal GIF
+    const modal = document.getElementById('gifModal');
+    const gifImg = document.getElementById('gifPopup');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    // Fungsi buka popup GIF
     function showGifPopup() {
-        // Buat modal
-        const modal = document.createElement('div');
-        modal.classList.add('modal-popup');
-        modal.innerHTML = `
-            <div class="modal-content">
-                <img id="popupGif" src="${URL_GIF_POPUP}" alt="Love GIF">
-                <p>💘 LOVE TERKIRIM UNTUK DEA 💘</p>
-                <button class="close-modal">Tutup ✨</button>
-            </div>
-        `;
-        document.body.appendChild(modal);
-
-        const imgGif = modal.querySelector('#popupGif');
-        imgGif.onerror = () => {
-            imgGif.src = "https://placehold.co/300x200/ffb7c5/white?text=❤️+LOVE+❤️";
-            imgGif.style.objectFit = "cover";
-        };
-
-        const closeBtn = modal.querySelector('.close-modal');
-        closeBtn.addEventListener('click', () => {
-            modal.remove();
-        });
-
-        // Klik di luar modal juga bisa tutup
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.remove();
-        });
+        // Set source GIF
+        if (URL_GIF && URL_GIF !== "") {
+            gifImg.src = URL_GIF;
+            gifImg.onerror = () => {
+                // Fallback kalau GIF gagal load
+                gifImg.src = "https://placehold.co/300x300/ffb7c5/white?text=💖+LOVE+💖";
+                gifImg.alt = "Love GIF gagal dimuat";
+            };
+        } else {
+            gifImg.src = "https://placehold.co/300x300/ffb7c5/white?text=💖+LOVE+💖";
+        }
+        
+        modal.style.display = 'flex';
+        burstHearts(15);
     }
 
+    // Tutup modal
+    closeModalBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    // Klik di luar modal juga nutup
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    // Tombol "Klik ini"
     const btnLove = document.getElementById('btnLove');
     btnLove.addEventListener('click', () => {
-        burstHearts(20);
         showGifPopup();
     });
 
-    // Auto floating hearts santai
+    // Love otomatis sesekali (biar web makin imut)
     setInterval(() => {
-        if (Math.random() > 0.75) createFloatingHeart();
-    }, 4000);
+        if (Math.random() > 0.7) createFloatingHeart();
+    }, 4500);
 </script>
 </body>
 </html>
